@@ -50,11 +50,16 @@ define(['baiduAPI', 'jquery', 'bMapMarker/MarkerRepo', 'navi/NaviRepo', 'rasterS
                 if(rasterRepo[i].org !== null) {
                     // 当终点与起点位于同一个栅格内
                     if(rasterRepo[i].des !== null) {
+                        var desPoint = [{
+                            lng : rasterRepo[i].des.point.lng,
+                            lat : rasterRepo[i].des.point.lat
+                        }];
                         var points = {
                             org : rasterRepo[i].org,
-                            des : [rasterRepo[i].des]
+                            des : desPoint
                         };
-                        new Navigation().findShortestPath(pointsOfOrg, rasterRepo[i]);
+                        new Navigation().findShortestPath(points, rasterRepo[i]);
+                        break;
                     }
                     // 当终点与起点不在同一个栅格内
                     else {
@@ -84,7 +89,7 @@ define(['baiduAPI', 'jquery', 'bMapMarker/MarkerRepo', 'navi/NaviRepo', 'rasterS
                                  * NAVIPARA.destination = nearestExit;
                                  */
                                 new Navigation().baiduNaviSearch(NAVIPARA);
-
+                                break;
                             }
                             // 当终点不在栅格内
                             else {
@@ -100,8 +105,10 @@ define(['baiduAPI', 'jquery', 'bMapMarker/MarkerRepo', 'navi/NaviRepo', 'rasterS
                                  * NAVIPARA.origin = nearestExit;
                                  */
                                 new Navigation().baiduNaviSearch(NAVIPARA);
+                                break;
                             }
                         }
+                        break;
                     }
                 }
             }
@@ -109,23 +116,27 @@ define(['baiduAPI', 'jquery', 'bMapMarker/MarkerRepo', 'navi/NaviRepo', 'rasterS
             // 第一次循环后，如果没有在任何一个栅格内找到起点，进入第二次循环，判断终点的情况
             for(var i = 0, lenOfDes = rasterRepo.length; i < lenOfDes; i++) {
                 // 当终点存在于一个栅格内时
-                if(rasterRepo[i].des !== null) {
-                    var pointsOfDes = {
-                        org : rasterRepo[i].des,
-                        des : rasterRepo[i].rasterPara.exit
-                    };
-                    new Navigation().findShortestPath(pointsOfDes, rasterRepo[i]);
-                    /**
-                     * var nearestExit = ...
-                     * 这里写一个方法，提取返回的json对象里最后一个点的坐标，并生成一个Marker作为百度导航的终点；
-                     * 并重新设置百度导航的终点为刚才生成的Marker
-                     * NAVIPARA.destination = nearestExit;
-                     */
-                    new Navigation().baiduNaviSearch(NAVIPARA);
-                }
-                // 终点也不在任何一个栅格内，即起点和终点都在栅格外
-                else {
-                    new Navigation().baiduNaviSearch(NAVIPARA);
+                if(rasterRepo[i].org === null) {
+                    if(rasterRepo[i].des !== null) {
+                        var pointsOfDes = {
+                            org : rasterRepo[i].des,
+                            des : rasterRepo[i].rasterPara.exit
+                        };
+                        new Navigation().findShortestPath(pointsOfDes, rasterRepo[i]);
+                        /**
+                         * var nearestExit = ...
+                         * 这里写一个方法，提取返回的json对象里最后一个点的坐标，并生成一个Marker作为百度导航的终点；
+                         * 并重新设置百度导航的终点为刚才生成的Marker
+                         * NAVIPARA.destination = nearestExit;
+                         */
+                        new Navigation().baiduNaviSearch(NAVIPARA);
+                        break;
+                    }
+                    // 终点也不在任何一个栅格内，即起点和终点都在栅格外
+                    else {
+                        new Navigation().baiduNaviSearch(NAVIPARA);
+                        break;
+                    }
                 }
             }
         },
