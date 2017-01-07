@@ -1,7 +1,4 @@
 /**
- * Created by Conqu on 2016/5/5.
- */
-/**
  * 检索定位模块
  */
 define(['baiduAPI','jquery', 'bMapMarker/PointMarker'], function (BMap, $, pointMarker) {
