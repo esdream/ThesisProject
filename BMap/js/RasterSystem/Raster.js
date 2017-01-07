@@ -2,7 +2,7 @@
  * Created by Faizal on 2016/5/6.
  */
 /**
- * Raster对象模块 
+ * Raster对象模块
  */
 define(['baiduAPI', 'jquery', 'rasterSystem/RasterRepo', 'bMapMarker/PointMarker'], function (BMap, $, RasterRepo, pointMarker) {
     function Raster() {
@@ -25,7 +25,7 @@ define(['baiduAPI', 'jquery', 'rasterSystem/RasterRepo', 'bMapMarker/PointMarker
             var PARA = $.extend(this.para, para);
             //Raster对象选项
             var groundOverlayOptions = {
-                opacity : 0.5,
+                opacity : 0,
                 displayOnMinLevel: 10,
                 displayOnMaxLevel: 19
             },
@@ -59,7 +59,7 @@ define(['baiduAPI', 'jquery', 'rasterSystem/RasterRepo', 'bMapMarker/PointMarker
             //     new Raster().addExit(PARA, rasterData, e);
             //     console.log(e);
             // });
-            
+
             //将Raster对象添加到RasterRepo中
             RasterRepo.addRaster({
                 rasterData : rasterData

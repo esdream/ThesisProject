@@ -164,9 +164,12 @@ define(['baiduAPI', 'jquery', 'bMapMarker/MarkerRepo', 'navi/NaviRepo', 'rasterS
             }
 
             console.log(orgPoint, desPoints);
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 1a7e22cf92abd3fe2aab66ac355894e4f8eb801d
             // 转换完成后，向服务器端发送起点和终点素组的像素坐标数据
             $.post('/sendPoints', {orgPoint: orgPoint, desPoints: desPoints}, function (data, textStatus) {
                 console.log(textStatus + ',' + data.result);    

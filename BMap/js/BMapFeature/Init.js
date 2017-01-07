@@ -19,7 +19,7 @@ define(['baiduAPI','bMapFeature/Traffic', 'bMapFeature/ContextMenuBar', 'user/In
             map.addControl(mapType1);          //2D图，卫星图
             map.addControl(mapType2);          //左上角，默认地图控件
             map.setCurrentCity("南京");        //由于有3D图，需要设置城市
-            
+
             map.addEventListener('click', function (point) {
                 console.log(point);
             });
@@ -71,11 +71,11 @@ define(['baiduAPI','bMapFeature/Traffic', 'bMapFeature/ContextMenuBar', 'user/In
         (function (map) {
             var para = {
                 map : map,
-                url : 'testImg/NJUXianLin.jpg',
-                NELng : 118.973245,
-                NELat : 32.135912,
-                SWLng : 118.957363,
-                SWLat : 32.112794,
+                url : 'testImg/NJUXianLin.png',
+                NELng : 118.972845,
+                NELat : 32.135132,
+                SWLng : 118.956963,
+                SWLat : 32.112014,
                 exit : [
                     {
                         lng : 118.967694,
